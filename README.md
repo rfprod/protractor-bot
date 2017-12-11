@@ -2,6 +2,26 @@
 
 for arbitrary website testing
 
+## Requirements
+
+- [`Node.js`](https://nodejs.org/)
+- [`NPM`](https://nodejs.org/)
+- [`Git`](https://git-scm.com/)
+
+## Installation
+
+from the projects root folder execute
+
+```
+git clone https://github.com/rfprod/protractor-bot.git
+```
+
+now execute
+
+```
+cd protractor-bot
+```
+
 ## Environment variables
 
 `.env` file should be created in the project root with the following environment variables inside
@@ -23,6 +43,14 @@ or which is the same
 
 ```
 bash create-env.sh http://website.url account_email_or_login account_password number_of_passes
+```
+
+## Start
+
+execute from `protractor-bot` root
+
+```
+npm start
 ```
 
 ## References
