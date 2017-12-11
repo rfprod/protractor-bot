@@ -1,0 +1,36 @@
+{
+	"name": "protractor-bot",
+	"version": "1.0.0",
+	"description": "protractor bot",
+	"main": "index.js",
+	"license": "MIT",
+	"repository": "https://github.com/rfprod/protractor-bot",
+	"author": "rfprod",
+	"engines": {
+		"node": ">= 7.9.0",
+		"npm": ">= 4.2.0"
+	},
+	"keywords": [
+		"protractor",
+		"bot"
+	],
+	"dependencies": {
+		"dotenv": "^4.0.0",
+		"eslint": "^4.13.0",
+		"gulp": "^3.9.1",
+		"gulp-eslint": "^4.0.0",
+		"run-sequence": "^2.2.0",
+		"jasmine-core": "^2.8.0",
+		"protractor": "^5.2.1"
+	},
+	"scripts": {
+		"start": "npm run protractor",
+		"lint": "gulp watch-and-lint",
+		"lint-single-run": "gulp lint",
+		"create-env": "bash create-env.sh",
+		"preupdate-webdriver": "npm install",
+		"update-webdriver": "webdriver-manager update",
+		"preprotractor": "npm run update-webdriver",
+		"protractor": "protractor bot/protractor.conf.js"
+	}
+}
