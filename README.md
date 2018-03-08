@@ -59,4 +59,4 @@ npm start
 
 ## Licence
 
-[Protractor bot](LICENSE.md)
+[Protractor bot](LICENSE)
