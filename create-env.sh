@@ -18,7 +18,6 @@ fi
 #echo 'LOGIN' $2
 #echo 'PASSWORD' $3
 #echo 'PASSES' $4
-#echo ' >> starting email service prerequisites ...'
 printf " ${LIGHT_BLUE} >> creating .env file with the following contents:\n"
 printf " ${YELLOW}  >> HOST=$1\n"
 printf " ${YELLOW}  >> LOGIN=$2\n"
