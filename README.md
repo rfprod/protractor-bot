@@ -31,6 +31,14 @@ HOST=website_domain
 LOGIN=account_email_or_login
 PASSWORD=account_password
 PASSES=number_of_passes
+
+MAILER_HOST=smtp.gmail.com
+MAILER_PORT=465
+MAILER_EMAIL=dummy-sender-email@gmail.com
+MAILER_CLIENT_ID=dummy-client-id.apps.googleusercontent.com
+MAILER_CLIENT_SECRET=dummy-client-secret
+MAILER_REFRESH_TOKEN=dummy-refresh-token
+MAILER_RECIPIENT_EMAIL=dummy-recipient-email@gmail.com
 ```
 
 try using command
