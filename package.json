@@ -2,13 +2,13 @@
 	"name": "protractor-bot",
 	"version": "1.0.0",
 	"description": "protractor bot",
-	"main": "index.js",
+	"main": "server.js",
 	"license": "MIT",
 	"repository": "https://github.com/rfprod/protractor-bot",
 	"author": "rfprod",
 	"engines": {
-		"node": ">= 7.9.0",
-		"npm": ">= 4.2.0"
+		"node": ">= 8.1.0",
+		"npm": ">= 5.1.0"
 	},
 	"keywords": [
 		"protractor",

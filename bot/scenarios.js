@@ -18,24 +18,26 @@ describe('Bot: ', () => {
 
 	console.log('envVars', this.envVars);
 
-	it('should load an index page, input login on users behalf and take action', () => {
+	it('should load an index page with five images', () => {
 		browser.get(this.envVars.host);
 		browser.getCurrentUrl().then((url) => {
 			expect(url).toMatch(this.envVars.host);
 
-			const form = {
-				username: element.all(by.css('input[id*=loginform-username]')),
-				password: element.all(by.css('input[id*=loginform-password]'))
-			};
-			expect(form.username.count()).toEqual(1);
-			expect(form.password.count()).toEqual(1);
+			element.all(by.css('a[id*="github"]')).then((items) => {
+				expect(items.length).toEqual(1);
+			});
 
-			/*
-			*	TODO
-			*	- login on user's behalf using creadentials: this.envVars.login, this.envVars.password
-			*	- press needed buttons to navigate to desired view or just load it using browser.get(this.envVars.host + '/desired-path-relative-to-host')
-			*	- repeat action this.envVars.passes number of times
-			*/
+			element.all(by.css('a[id*="codepen"]')).then((items) => {
+				expect(items.length).toEqual(1);
+			});
+
+			element.all(by.css('a[id*="codewars"]')).then((items) => {
+				expect(items.length).toEqual(1);
+			});
+
+			element.all(by.css('a[id*="hackerrank"]')).then((items) => {
+				expect(items.length).toEqual(1);
+			});
 		});
 	});
 
