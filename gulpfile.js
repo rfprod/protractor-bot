@@ -1,15 +1,17 @@
 'use strict';
 
-const gulp = require('gulp'),
-	runSequence = require('run-sequence'),
-	eslint = require('gulp-eslint'),
-	spawn = require('child_process').spawn,
-	exec = require('child_process').exec;
+const gulp = require('gulp');
+const runSequence = require('run-sequence');
+const eslint = require('gulp-eslint');
+const spawn = require('child_process').spawn;
+const exec = require('child_process').exec;
+
+let node;
 let protractor;
 
 function killProcessByName(name) {
 	exec('pgrep ' + name, (error, stdout, stderr) => {
-		if (error) throw error;
+		if (error) console.log('error: ', stderr);
 		if (stderr) console.log('stderr: ', stderr);
 		if (stdout) {
 			//console.log('killing running processes: ', stdout);
@@ -44,10 +46,32 @@ gulp.task('watch-and-lint', () => {
 gulp.task('protractor', () => {
 	if (protractor) protractor.kill();
 	protractor = spawn('npm', ['run', 'protractor'], {stdio: 'inherit'});
+	protractor.on('close', (code) => {
+		console.log('protractor closed with code', code);
+	});
 });
 
 gulp.task('default', (done) => {
 	runSequence('protractor', done);
+});
+
+/*
+*	server
+*/
+gulp.task('server', (done) => {
+	if (node) node.kill();
+	node = spawn('node', ['server.js'], {stdio: 'inherit'});
+	node.on('close', (code) => {
+		if (code === 8) {
+			gulp.log('Error detected, waiting for changes...');
+		}
+	});
+	done();
+});
+
+gulp.task('server-kill', (done) => {
+	if (node) node.kill();
+	done();
 });
 
 process.on('SIGINT', () => {

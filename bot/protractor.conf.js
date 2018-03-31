@@ -1,3 +1,6 @@
+const testUtils = require('./test-utils');
+const isDocker = testUtils.isDocker();
+
 require('dotenv').load();
 
 console.log('process.env', process.env.HOST);
@@ -14,8 +17,12 @@ exports.config = {
 
 	onPrepare: () => {
 		// browser.angularAppRoot('html');
-		browser.ignoreSynchronization = true;
+		// browser.ignoreSynchronization = true;
 		browser.driver.get(envVars.host);
+
+		return browser.getProcessedConfig().then((/*config*/) => {
+			// console.log('config:', config);
+		});
 	},
 
 	specs: [
@@ -25,7 +32,16 @@ exports.config = {
 	capabilities: {
 		browserName: 'chrome',
 		chromeOptions: {
-			args: [ /*'--headless', */'--disable-gpu', '--window-size=1024x768' ]
+			args: (!isDocker) ? [
+				/*'--headless',*/
+				'--disable-gpu',
+				'--window-size=1680x1024'
+			] : [
+				'--headless',
+				'--disable-gpu',
+				'--window-size=1680x1024',
+				'--no-sandbox'
+			]
 		}
 	},
 
@@ -36,6 +52,23 @@ exports.config = {
 	baseUrl: envVars.host,
 
 	framework: 'jasmine',
+
+	plugins: [
+		{
+			package: 'jasmine2-protractor-utils',
+			disableHTMLReport: false,
+			disableScreenshot: false,
+			screenshotOnExpectFailure: true, // default: false
+			screenshotOnSpecFailure: true, // default: false
+			screenshotPath: 'logs/e2e/screenshots', // default: 'reports/screenshots'
+			clearFoldersBeforeTest: true, // default: false
+			htmlReportDir: 'logs/e2e/report', // default: 'reports/htmlReports'
+			failTestOnErrorLog: {
+				failTestOnErrorLogLevel: 5000, // default: 900
+				// excludeKeywords: []
+			}
+		}
+	],
 
 	allScriptsTimeout: 30000,
 
