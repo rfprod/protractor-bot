@@ -5,8 +5,8 @@
  * @module app/utils/srv-info
  */
 
-const os = require('os'),
-	exec = require('child_process').execSync;
+const os = require('os');
+const exec = require('child_process').execSync;
 
 /**
  * @function npmVersion

@@ -1,8 +1,6 @@
 'use strict';
 
-const spawn = require('child_process').spawn;
-
-module.exports = (cwd, schedule, mailTransporter) => {
+module.exports = (cwd, spawn, exec, schedule, mailTransporter) => {
 
 	/*
 	* send report
@@ -45,7 +43,8 @@ module.exports = (cwd, schedule, mailTransporter) => {
 		protractor.on('close', (code) => {
 			console.log('protractor closed with code', code);
 			/*
-			*	TODO: send report on protractor exit
+			*	TODO:email report sending works, but authentication should be debugged further,
+			*	see https://developers.google.com/gmail/api/quickstart/nodejs for info on obtaining an access token
 			*/
 			plainTextReport += `
 protractor closed with code ${code}.
@@ -54,7 +53,7 @@ Date: ${new Date().toUTCString()}`;
 <p>Protractor closed with code ${code}</p>
 <p>Date: ${new Date().toUTCString()}</p>
 </body></html>`;
-			// sendEmailReport(process.env.MAILER_RECIPIENT_EMAIL, plainTextReport, htmlReport); // deployment config
+			sendEmailReport(process.env.MAILER_RECIPIENT_EMAIL, plainTextReport, htmlReport);
 		});
 
 	});

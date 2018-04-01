@@ -12,6 +12,8 @@ const reporter = require('./server/reporter/index.js');
 const app = express();
 const expressWs = require('express-ws')(app);
 const fs = require('fs');
+const spawn = require('child_process').spawn;
+const exec = require('child_process').exec;
 
 require('dotenv').load();
 
@@ -74,13 +76,21 @@ let smtpConfig = {
 		clientId: process.env.MAILER_CLIENT_ID,
 		clientSecret: process.env.MAILER_CLIENT_SECRET,
 		refreshToken: process.env.MAILER_REFRESH_TOKEN,
-		accessToken: 'empty'
+		accessToken: process.env.MAILER_ACCESS_TOKEN,
+		/*
+		*	accessUrl value differs from the one in nodemailer config by default,
+		*	the value is taken from https://developers.google.com/oauthplayground
+		*/
+		accessUrl: 'https://www.googleapis.com/oauth2/v4/token'
 	}
 };
 // smtpConfig.proxy = 'socks5://ip-address:port/';
 
 /*
-*	TODO: fix mail transporter
+*	TODO:email report sending works, but authentication should be debugged further,
+*	see https://developers.google.com/gmail/api/quickstart/nodejs for info on obtaining an access token
+*
+*	nodemailer is not able to get access token on transporter creation if one is not provided in config
 */
 
 const mailTransporter = nodemailer.createTransport(smtpConfig);
@@ -94,7 +104,7 @@ mailTransporter.verify((err, success) => {
 
 routes(app, cwd, fs, srvInfo);
 
-reporter(cwd, schedule, mailTransporter);
+reporter(cwd, spawn, exec, schedule, mailTransporter);
 
 const port = process.env.PORT || 8080,
 	ip = process.env.IP;

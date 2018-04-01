@@ -33,7 +33,7 @@
 	},
 	"scripts": {
 		"prestart": "npm install",
-		"start": "gulp protractor",
+		"start": "gulp protractor && npm run create-logs-index",
 		"server": "npm install && npm run create-logs-index && gulp server",
 		"lint": "gulp watch-and-lint",
 		"lint-single-run": "gulp lint",
@@ -45,7 +45,7 @@
 		"preupdate-webdriver": "npm install",
 		"update-webdriver": "webdriver-manager update",
 		"preprotractor": "npm run update-webdriver",
-		"protractor": "protractor bot/protractor.conf.js",
-		"protractor-noinstall": "protractor bot/protractor.conf.js"
+		"protractor": "protractor bot/protractor.conf.js && npm run create-logs-index",
+		"protractor-noinstall": "protractor bot/protractor.conf.js && npm run create-logs-index"
 	}
 }
