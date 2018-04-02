@@ -18,8 +18,8 @@ source util-echo_colours.sh
 # BLUE, LIGHT_BLUE, PURPLE, LIGHT_PURPLE, CYAN, LIGHT_CYAN, LIGHT_GRAY, WHITE
 
 if [ $# -ne 11 ]; then
-  printf "${RED} << ERROR: 12 arguments expected >>\n"
-  printf " ${LIGHT_GREEN} $0 usage:\n  ${YELLOW}bash create-env.sh http://website.url account_email_or_login account_password number_of_passes MAILER_HOST MAILER_PORT MAILER_EMAIL MAILER_CLIENT_ID MAILER_CLIENT_SECRET MAILER_REFRESH_TOKEN MAILER_ACCESS_TOKEN MAILER_RECIPIENT_EMAIL\n${DEFAULT}"
+  printf "${RED} << ERROR: 11 arguments expected >>\n"
+  printf " ${LIGHT_GREEN} $0 usage:\n  ${YELLOW}bash create-env.sh http://website.url account_email_or_login account_password number_of_passes MAILER_HOST MAILER_PORT MAILER_EMAIL MAILER_CLIENT_ID MAILER_CLIENT_SECRET MAILER_REFRESH_TOKEN MAILER_RECIPIENT_EMAIL\n${DEFAULT}"
   exit 1
 fi
 #echo 'HOST' $1
@@ -37,8 +37,8 @@ printf " ${YELLOW}  >> MAILER_EMAIL=$7\n"
 printf " ${YELLOW}  >> MAILER_CLIENT_ID=$8\n"
 printf " ${YELLOW}  >> MAILER_CLIENT_SECRET=$9\n"
 printf " ${YELLOW}  >> MAILER_REFRESH_TOKEN=$10\n"
-printf " ${YELLOW}  >> MAILER_ACCESS_TOKEN=$11\n"
-printf " ${YELLOW}  >> MAILER_RECIPIENT_EMAIL=$12\n"
+printf " ${YELLOW}  >> MAILER_ACCESS_TOKEN=empty\n"
+printf " ${YELLOW}  >> MAILER_RECIPIENT_EMAIL=$11\n"
 echo "HOST=$1" >./.env # overwrite .env first
 echo "LOGIN=$2" >>./.env # then append
 echo "PASSWORD=$3" >>./.env

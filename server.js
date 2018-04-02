@@ -76,12 +76,7 @@ let smtpConfig = {
 		clientId: process.env.MAILER_CLIENT_ID,
 		clientSecret: process.env.MAILER_CLIENT_SECRET,
 		refreshToken: process.env.MAILER_REFRESH_TOKEN,
-		accessToken: process.env.MAILER_ACCESS_TOKEN,
-		/*
-		*	accessUrl value differs from the one in nodemailer config by default,
-		*	the value is taken from https://developers.google.com/oauthplayground
-		*/
-		accessUrl: 'https://www.googleapis.com/oauth2/v4/token'
+		accessToken: process.env.MAILER_ACCESS_TOKEN || 'empty'
 	}
 };
 // smtpConfig.proxy = 'socks5://ip-address:port/';
