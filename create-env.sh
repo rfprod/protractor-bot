@@ -49,7 +49,7 @@ echo "MAILER_EMAIL=$7" >>./.env
 echo "MAILER_CLIENT_ID=$8" >>./.env
 echo "MAILER_CLIENT_SECRET=$9" >>./.env
 echo "MAILER_REFRESH_TOKEN=$10" >>./.env
-echo "MAILER_ACCESS_TOKEN=$11" >>./.env
-echo "MAILER_RECIPIENT_EMAIL=$12" >>./.env
+echo "MAILER_ACCESS_TOKEN=$empty" >>./.env
+echo "MAILER_RECIPIENT_EMAIL=$11" >>./.env
 printf " ${GREEN} >> successfully created .env file ...${DEFAULT} "
 echo ""
