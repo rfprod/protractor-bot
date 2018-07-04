@@ -35,11 +35,13 @@ exports.config = {
 			args: (!isDocker) ? [
 				/*'--headless',*/
 				'--disable-gpu',
-				'--window-size=1680x1024'
+				'--window-size=1680x1024',
+				'--remote-debugging-port=9222'
 			] : [
 				'--headless',
 				'--disable-gpu',
 				'--window-size=1680x1024',
+				'--remote-debugging-port=9222',
 				'--no-sandbox'
 			]
 		}

@@ -8,13 +8,15 @@ WORKDIR /app
 COPY . .
 
 ## export variables for tests
-ENV DISPLAY=:99 CHROME_BIN=chromium
+ENV DISPLAY=:99 CHROME_BIN=google-chrome-stable
 
 # install apt packages for tests execution:
-## chromium, xvfb
-RUN apt-get -y update --fix-missing; \
+## google-chrome-stable, xvfb
+RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -; \
+	echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | tee /etc/apt/sources.list.d/google-chrome.list; \
+	apt-get -y update --fix-missing; \
 	apt-get -y install --fix-missing --no-install-recommends apt-utils; \
-	apt-get -y upgrade --fix-missing && apt-get -y install --fix-missing chromium xvfb; \
+	apt-get -y upgrade --fix-missing && apt-get -y install --fix-missing google-chrome-stable xvfb; \
 ## start xvfb
 	Xvfb :99 -screen 0 1680x1024x8 -nolisten tcp & sleep 2; \
 #
@@ -37,7 +39,7 @@ RUN apt-get -y update --fix-missing; \
 	rm ./*.json ./*.sh ./*.md ./Dockerfile* ./.dockerignore ./.editorconfig ./.eslintignore ./.gitignore
 
 # don't purge previously installed packages via apt
-# RUN apt-get purge -y chromium xvfb apt-utils
+# RUN apt-get purge -y google-chrome-stable xvfb apt-utils
 # RUN apt-get -y autoremove
 # RUN apt-get -y clean
 
