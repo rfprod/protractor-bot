@@ -7,6 +7,7 @@ Website testing tool.
 - [`Node.js`](https://nodejs.org/)
 - [`NPM`](https://nodejs.org/)
 - [`Git`](https://git-scm.com/)
+- [`Docker`](https://www.docker.com/) `optional`
 
 ## Installation
 
@@ -99,6 +100,10 @@ npm run docker-start
 ## References
 
 [Protractor](http://www.protractortest.org/#/api)
+
+[`Docker documentation`](https://docs.docker.com)
+[`Docker documentation: Engine command-line reference`](https://docs.docker.com/engine/reference/commandline/docker/)
+[`Docker documentation: Configure and use Docker`](https://docs.docker.com/engine/reference/commandline/docker/)
 
 ## Licence
 
