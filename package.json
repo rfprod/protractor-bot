@@ -1,51 +1,54 @@
 {
-	"name": "protractor-bot",
-	"version": "1.0.0",
-	"description": "protractor bot",
-	"main": "server.js",
-	"license": "MIT",
-	"repository": "https://github.com/rfprod/protractor-bot",
-	"author": "rfprod",
-	"engines": {
-		"node": ">= 8.1.0",
-		"npm": ">= 5.1.0"
-	},
-	"keywords": [
-		"protractor",
-		"bot"
-	],
-	"dependencies": {
-		"body-parser": "^1.18.3",
-		"compression": "^1.7.3",
-		"connect-flash": "^0.1.1",
-		"dotenv": "^6.0.0",
-		"eslint": "^5.5.0",
-		"express": "^4.16.3",
-		"express-ws": "^4.0.0",
-		"gulp": "^3.9.1",
-		"gulp-eslint": "^5.0.0",
-		"jasmine-core": "^3.2.1",
-		"jasmine2-protractor-utils": "^1.3.0",
-		"node-schedule": "^1.3.0",
-		"nodemailer": "^4.6.8",
-		"protractor": "^5.4.0",
-		"run-sequence": "^2.2.1"
-	},
-	"scripts": {
-		"prestart": "npm install",
-		"start": "gulp protractor && npm run create-logs-index",
-		"server": "npm install && npm run create-logs-index && gulp server",
-		"lint": "gulp watch-and-lint",
-		"lint-single-run": "gulp lint",
-		"create-env": "bash create-env.sh",
-		"create-logs-index": "echo '<html><body><pre><a href=\"/logs/e2e/report/index.html\" target=_blank>protractor logs</a></pre></body></html>' > ./logs/index.html",
-		"docker": "bash ci/docker.sh",
-		"docker-build": "bash ci/docker.sh build",
-		"docker-start": "bash ci/docker.sh start",
-		"preupdate-webdriver": "npm install",
-		"update-webdriver": "webdriver-manager update",
-		"preprotractor": "npm run update-webdriver",
-		"protractor": "protractor bot/protractor.conf.js && npm run create-logs-index",
-		"protractor-noinstall": "protractor bot/protractor.conf.js && npm run create-logs-index"
-	}
+  "name": "protractor-bot",
+  "version": "1.0.0",
+  "description": "protractor bot",
+  "keywords": [
+    "bot",
+    "protractor"
+  ],
+  "repository": "https://github.com/rfprod/protractor-bot",
+  "license": "MIT",
+  "author": "rfprod",
+  "main": "server.js",
+  "scripts": {
+    "create-env": "bash create-env.sh",
+    "create-logs-index": "echo '<html><body><pre><a href=\"/logs/e2e/report/index.html\" target=_blank>protractor logs</a></pre></body></html>' > ./logs/index.html",
+    "docker": "bash ci/docker.sh",
+    "docker-build": "bash ci/docker.sh build",
+    "docker-start": "bash ci/docker.sh start",
+    "postinstall": "npx sort-package-json",
+    "lint": "gulp watch-and-lint",
+    "lint-single-run": "gulp lint",
+    "preprotractor": "npm run update-webdriver",
+    "protractor": "protractor bot/protractor.conf.js && npm run create-logs-index",
+    "protractor-noinstall": "protractor bot/protractor.conf.js && npm run create-logs-index",
+    "server": "npm install && npm run create-logs-index && gulp server",
+    "prestart": "npm install",
+    "start": "npm run protractor",
+    "preupdate-webdriver": "npm install",
+    "update-webdriver": "webdriver-manager update"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "compression": "^1.7.4",
+    "connect-flash": "^0.1.1",
+    "dotenv": "^8.0.0",
+    "eslint": "^5.16.0",
+    "express": "^4.17.1",
+    "express-ws": "^4.0.0",
+    "gulp": "^4.0.2",
+    "gulp-eslint": "^5.0.0",
+    "jasmine-core": "^3.4.0",
+    "jasmine2-protractor-utils": "^1.3.0",
+    "node-schedule": "^1.3.2",
+    "nodemailer": "^6.2.1",
+    "protractor": "^5.4.2"
+  },
+  "devDependencies": {
+    "sort-package-json": "^1.22.1"
+  },
+  "engines": {
+    "node": ">= 10.16.0",
+    "npm": ">= 6.9.0"
+  }
 }

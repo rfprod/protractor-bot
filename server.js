@@ -15,7 +15,7 @@ const fs = require('fs');
 const spawn = require('child_process').spawn;
 const exec = require('child_process').exec;
 
-require('dotenv').load();
+require('dotenv').config();
 
 process.title = 'protractorBot';
 
