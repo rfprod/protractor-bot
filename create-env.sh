@@ -19,7 +19,8 @@ source util-echo_colours.sh
 
 if [ $# -ne 11 ]; then
   printf "${RED} << ERROR: 11 arguments expected >>\n"
-  printf " ${LIGHT_GREEN} $0 usage:\n  ${YELLOW}bash create-env.sh http://website.url account_email_or_login account_password number_of_passes MAILER_HOST MAILER_PORT MAILER_EMAIL MAILER_CLIENT_ID MAILER_CLIENT_SECRET MAILER_REFRESH_TOKEN MAILER_RECIPIENT_EMAIL\n${DEFAULT}"
+  printf " ${LIGHT_GREEN} $0 usage:\n
+    ${YELLOW}bash create-env.sh http://website.url account_email_or_login account_password number_of_passes MAILER_HOST MAILER_PORT MAILER_EMAIL MAILER_CLIENT_ID MAILER_CLIENT_SECRET MAILER_REFRESH_TOKEN MAILER_RECIPIENT_EMAIL\n${DEFAULT}"
   exit 1
 fi
 #echo 'HOST' $1
