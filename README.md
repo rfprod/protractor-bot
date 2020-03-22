@@ -99,12 +99,11 @@ npm run docker-start
 
 ## References
 
-[Protractor](http://www.protractortest.org/#/api)
-
-[`Docker documentation`](https://docs.docker.com)
-[`Docker documentation: Engine command-line reference`](https://docs.docker.com/engine/reference/commandline/docker/)
-[`Docker documentation: Configure and use Docker`](https://docs.docker.com/engine/reference/commandline/docker/)
+- [`Protractor`](http://www.protractortest.org/#/api)
+- [`Docker documentation`](https://docs.docker.com)
+- [`Docker documentation: Engine command-line reference`](https://docs.docker.com/engine/reference/commandline/docker/)
+- [`Docker documentation: Configure and use Docker`](https://docs.docker.com/engine/reference/commandline/docker/)
 
 ## Licence
 
-[Protractor bot](LICENSE)
+- [Protractor bot](LICENSE)
