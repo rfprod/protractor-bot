@@ -1,23 +1,25 @@
-"use strict";
+'use strict';
 
-const express = require("express");
-const compression = require("compression");
-const bodyParser = require("body-parser");
-const flash = require("connect-flash");
-const schedule = require("node-schedule");
-const nodemailer = require("nodemailer");
-const srvInfo = require("./server/utils/srv-info.js");
-const routes = require("./server/routes/index.js");
-const reporter = require("./server/reporter/index.js");
+const express = require('express');
+const compression = require('compression');
+const bodyParser = require('body-parser');
+const flash = require('connect-flash');
+const schedule = require('node-schedule');
+const nodemailer = require('nodemailer');
+const srvInfo = require('./server/utils/srv-info.js');
+const routes = require('./server/routes/index.js');
+const reporter = require('./server/reporter/index.js');
 const app = express();
-const expressWs = require("express-ws")(app);
-const fs = require("fs");
-const spawn = require("child_process").spawn;
-const exec = require("child_process").exec;
+const expressWs = require('express-ws');
+const fs = require('fs');
+const spawn = require('child_process').spawn;
+const exec = require('child_process').exec;
 
-require("dotenv").config();
+expressWs(app);
 
-process.title = "protractorBot";
+require('dotenv').config();
+
+process.title = 'protractorBot';
 
 const cwd = __dirname;
 
@@ -25,44 +27,33 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(flash());
 
-app.use(
-  compression({
-    threshold: 0,
-    level: -1
-  })
-);
+app.use(compression({ threshold: 0, level: -1 }));
 
-app.use("/logs", express.static(cwd + "/logs"));
+app.use('/logs', express.static(cwd + '/logs'));
 
 app.use((req, res, next) => {
   const regX = /(logs|fonts|e2e|report|html|css|js)/;
   if (regX.test(req.path)) {
     return next();
   } else {
-    res.sendFile(cwd + "/logs/index.html");
+    res.sendFile(cwd + '/logs/index.html');
   }
 });
 
 // headers config for all Express routes
-app.all("/*", function(req, res, next) {
+app.all('/*', function (req, res, next) {
   // CORS headers
-  res.header("Access-Control-Allow-Origin", "*"); // restrict it to the required domain if needed
-  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Content-type,Accept,X-Access-Token,X-Key"
-  );
+  res.header('Access-Control-Allow-Origin', '*'); // restrict it to the required domain if needed
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-type,Accept,X-Access-Token,X-Key');
   // add headers to be exposed
-  res.header("Access-Control-Expose-Headers", "Views");
+  res.header('Access-Control-Expose-Headers', 'Views');
   // cache control
-  res.header(
-    "Cache-Control",
-    "public, no-cache, no-store, must-ravalidate, max-age=0"
-  );
-  res.header("Expires", "-1");
-  res.header("Pragma", "no-cache");
+  res.header('Cache-Control', 'public, no-cache, no-store, must-ravalidate, max-age=0');
+  res.header('Expires', '-1');
+  res.header('Pragma', 'no-cache');
   // handle OPTIONS method
-  if (req.method == "OPTIONS") res.status(200).end();
+  if (req.method == 'OPTIONS') res.status(200).end();
   else next();
 });
 
@@ -79,13 +70,13 @@ let smtpConfig = {
   port: process.env.MAILER_PORT,
   secure: true, // use SSL
   auth: {
-    type: "OAuth2",
+    type: 'OAuth2',
     user: process.env.MAILER_EMAIL,
     clientId: process.env.MAILER_CLIENT_ID,
     clientSecret: process.env.MAILER_CLIENT_SECRET,
     refreshToken: process.env.MAILER_REFRESH_TOKEN,
-    accessToken: process.env.MAILER_ACCESS_TOKEN || "empty"
-  }
+    accessToken: process.env.MAILER_ACCESS_TOKEN || 'empty',
+  },
 };
 // smtpConfig.proxy = 'socks5://ip-address:port/';
 
@@ -99,9 +90,9 @@ let smtpConfig = {
 const mailTransporter = nodemailer.createTransport(smtpConfig);
 mailTransporter.verify((err, success) => {
   if (err) {
-    console.log("Mail transporter diag error >>", err);
+    console.log('Mail transporter diag error >>', err);
   } else {
-    console.log("Mail transporter diag success >>", success);
+    console.log('Mail transporter diag success >>', success);
   }
 });
 
@@ -113,10 +104,8 @@ const port = process.env.PORT || 8080,
   ip = process.env.IP;
 
 function terminator(sig) {
-  if (typeof sig === "string") {
-    console.log(
-      `\n${Date(Date.now())}: Received signal ${sig} - terminating app...\n`
-    );
+  if (typeof sig === 'string') {
+    console.log(`\n${Date(Date.now())}: Received signal ${sig} - terminating app...\n`);
     process.exit(0);
     console.log(`${Date(Date.now())}: Node server stopped`);
   }
@@ -126,24 +115,24 @@ function terminator(sig) {
   /*
    *   termination handlers
    */
-  process.on("exit", () => {
-    terminator("exit");
+  process.on('exit', () => {
+    terminator('exit');
   });
   // Removed 'SIGPIPE' from the list - bugz 852598.
   [
-    "SIGHUP",
-    "SIGINT",
-    "SIGQUIT",
-    "SIGILL",
-    "SIGTRAP",
-    "SIGABRT",
-    "SIGBUS",
-    "SIGFPE",
-    "SIGUSR1",
-    "SIGSEGV",
-    "SIGUSR2",
-    "SIGTERM"
-  ].forEach(element => {
+    'SIGHUP',
+    'SIGINT',
+    'SIGQUIT',
+    'SIGILL',
+    'SIGTRAP',
+    'SIGABRT',
+    'SIGBUS',
+    'SIGFPE',
+    'SIGUSR1',
+    'SIGSEGV',
+    'SIGUSR2',
+    'SIGTERM',
+  ].forEach((element) => {
     process.on(element, () => {
       terminator(element);
     });

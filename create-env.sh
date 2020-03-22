@@ -1,3 +1,5 @@
+#!/bin/bash
+
 #	create .env file with the following contents
 #	HOST=website_domain
 #	LOGIN=account_email_or_login
@@ -13,7 +15,7 @@
 #	MAILER_RECIPIENT_EMAIL=MAILER_RECIPIENT_EMAIL
 
 # colours
-source util-echo_colours.sh
+source colors.sh
 # DEFAULT, BLACK, DARK_GRAY, RED, LIGHT_RED, GREEN, LIGHT_GREEN, BROWN, YELLOW,
 # BLUE, LIGHT_BLUE, PURPLE, LIGHT_PURPLE, CYAN, LIGHT_CYAN, LIGHT_GRAY, WHITE
 
@@ -37,10 +39,10 @@ printf " ${YELLOW}  >> MAILER_PORT=$6\n"
 printf " ${YELLOW}  >> MAILER_EMAIL=$7\n"
 printf " ${YELLOW}  >> MAILER_CLIENT_ID=$8\n"
 printf " ${YELLOW}  >> MAILER_CLIENT_SECRET=$9\n"
-printf " ${YELLOW}  >> MAILER_REFRESH_TOKEN=$10\n"
+printf " ${YELLOW}  >> MAILER_REFRESH_TOKEN=${10}\n"
 printf " ${YELLOW}  >> MAILER_ACCESS_TOKEN=empty\n"
-printf " ${YELLOW}  >> MAILER_RECIPIENT_EMAIL=$11\n"
-echo "HOST=$1" >./.env # overwrite .env first
+printf " ${YELLOW}  >> MAILER_RECIPIENT_EMAIL=${11}\n"
+echo "HOST=$1" >./.env   # overwrite .env first
 echo "LOGIN=$2" >>./.env # then append
 echo "PASSWORD=$3" >>./.env
 echo "PASSES=$4" >>./.env
@@ -49,8 +51,8 @@ echo "MAILER_PORT=$6" >>./.env
 echo "MAILER_EMAIL=$7" >>./.env
 echo "MAILER_CLIENT_ID=$8" >>./.env
 echo "MAILER_CLIENT_SECRET=$9" >>./.env
-echo "MAILER_REFRESH_TOKEN=$10" >>./.env
-echo "MAILER_ACCESS_TOKEN=$empty" >>./.env
-echo "MAILER_RECIPIENT_EMAIL=$11" >>./.env
+echo "MAILER_REFRESH_TOKEN=${10}" >>./.env
+echo "MAILER_ACCESS_TOKEN=empty" >>./.env
+echo "MAILER_RECIPIENT_EMAIL=${11}" >>./.env
 printf " ${GREEN} >> successfully created .env file ...${DEFAULT} "
 echo ""

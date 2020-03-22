@@ -1,15 +1,29 @@
-const testUtils = require("./test-utils");
+const testUtils = require('./test-utils');
 const isDocker = testUtils.isDocker();
 
-require("dotenv").config();
+require('dotenv').config();
 
-console.log("process.env", process.env.HOST);
+console.log('process.env', process.env.HOST);
 let envVars = {
   host: process.env.HOST,
   login: process.env.LOGIN,
   password: process.env.PASSWORD,
-  passes: process.env.PASSES
+  passes: process.env.PASSES,
 };
+
+const chromeOptionsArgs = [
+  '--disable-gpu',
+  '--window-size=1680x1024',
+  '--remote-debugging-port=9222',
+];
+
+const chromeOptionsDockerArgs = [
+  '--headless',
+  '--disable-gpu',
+  '--window-size=1680x1024',
+  '--remote-debugging-port=9222',
+  '--no-sandbox',
+];
 
 exports.config = {
   env: envVars,
@@ -24,26 +38,13 @@ exports.config = {
     });
   },
 
-  specs: ["scenarios.js"],
+  specs: ['scenarios.js'],
 
   capabilities: {
-    browserName: "chrome",
+    browserName: 'chrome',
     chromeOptions: {
-      args: !isDocker
-        ? [
-            /*'--headless',*/
-            "--disable-gpu",
-            "--window-size=1680x1024",
-            "--remote-debugging-port=9222"
-          ]
-        : [
-            "--headless",
-            "--disable-gpu",
-            "--window-size=1680x1024",
-            "--remote-debugging-port=9222",
-            "--no-sandbox"
-          ]
-    }
+      args: !isDocker ? chromeOptionsArgs : chromeOptionsDockerArgs,
+    },
   },
 
   chromeOnly: true,
@@ -52,23 +53,23 @@ exports.config = {
 
   baseUrl: envVars.host,
 
-  framework: "jasmine",
+  framework: 'jasmine',
 
   plugins: [
     {
-      package: "jasmine2-protractor-utils",
+      package: 'jasmine2-protractor-utils',
       disableHTMLReport: false,
       disableScreenshot: false,
       screenshotOnExpectFailure: true, // default: false
       screenshotOnSpecFailure: true, // default: false
-      screenshotPath: "logs/e2e/screenshots", // default: 'reports/screenshots'
+      screenshotPath: 'logs/e2e/screenshots', // default: 'reports/screenshots'
       clearFoldersBeforeTest: true, // default: false
-      htmlReportDir: "logs/e2e/report", // default: 'reports/htmlReports'
+      htmlReportDir: 'logs/e2e/report', // default: 'reports/htmlReports'
       failTestOnErrorLog: {
-        failTestOnErrorLogLevel: 5000 // default: 900
+        failTestOnErrorLogLevel: 5000, // default: 900
         // excludeKeywords: []
-      }
-    }
+      },
+    },
   ],
 
   allScriptsTimeout: 30000,
@@ -77,6 +78,6 @@ exports.config = {
 
   jasmineNodeOpts: {
     showColors: true,
-    defaultTimeoutInterval: 30000
-  }
+    defaultTimeoutInterval: 30000,
+  },
 };
